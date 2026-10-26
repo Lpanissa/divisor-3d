@@ -475,7 +475,7 @@ import { MeshBVH } from 'three-mesh-bvh';
 const $ = s => document.querySelector(s);
 const V = THREE.Vector3;
 const Z = new V(0,0,1);
-const tick = () => new Promise(r => requestAnimationFrame(() => setTimeout(r, 20)));
+const tick = () => new Promise(r => { let done=false; const go=()=>{ if(!done){ done=true; setTimeout(r,20); } }; requestAnimationFrame(go); setTimeout(go,120); });
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const PALETTE = ['#14b8d6','#f07a1a','#6f84f0','#3fbf7f','#e3b52f','#e0567a','#a07a56','#4fa3a3','#b46bd6','#8aa63a'];
 const nf1 = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
